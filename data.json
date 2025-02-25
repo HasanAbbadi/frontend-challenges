@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Expenses chart",
+    "path": "expenses-chart-component-main",
+    "source": "https://www.frontendmentor.io/challenges/expenses-chart-component-e7yJBUdjwt",
+    "tags": ["vue", "vue3-sfc-loader"],
+    "date": "2025-02-25"
+  },
+  {
+    "name": "Product list with cart",
+    "path": "product-list-with-cart-main",
+    "source": "https://www.frontendmentor.io/challenges/product-list-with-cart-5MmqLVAp_d",
+    "tags": ["vue"],
+    "date": "2025-02-22"
+  },
+  {
+    "name": "Movie ticket booking",
+    "path": "movie-ticket",
+    "source": "https://icodethis.com/modes/design-to-code/64/submissions",
+    "tags": ["no-js"],
+    "date": "2025-02-21"
+  }
+]

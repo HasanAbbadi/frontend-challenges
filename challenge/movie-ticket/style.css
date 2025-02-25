@@ -1,0 +1,178 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --fs-100: clamp(0.7813rem, 0.7747rem + 0.0326vw, 0.8rem);
+  --fs-200: clamp(0.9375rem, 0.9158rem + 0.1087vw, 1rem);
+  --fs-300: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
+  --fs-400: clamp(1.35rem, 1.2761rem + 0.3696vw, 1.5625rem);
+  --fs-500: clamp(1.62rem, 1.5041rem + 0.5793vw, 1.9531rem);
+  --fs-600: clamp(1.944rem, 1.771rem + 0.8651vw, 2.4414rem);
+
+  --fw-bold: 700;
+  --fw-medium: 500;
+  --fw-regular: 400;
+  --fw-light: 200;
+
+  --text-color: #000;
+  --white: #f9fafc;
+  --blue: #5a889c;
+  --dark-blue: #33596e;
+  --pink: #ec407a;
+
+  --bg-color: var(--white);
+  --accent-color: var(--pink);
+  --booked-color: rgba(from var(--blue) r g b / 0.35);
+  --available-color: var(--blue);
+}
+
+body {
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.available {
+  color: var(--available-color);
+}
+
+.booked {
+  color: var(--booked-color);
+}
+
+.selected {
+  color: var(--accent-color);
+}
+
+main {
+  height: 100vh;
+  user-select: none;
+
+  > .header {
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0.5rem 1.25rem;
+    color: var(--white);
+
+    background: linear-gradient(
+        to bottom left,
+        transparent 0%,
+        var(--dark-blue) 90%
+      ),
+      url(https://sm.ign.com/t/ign_za/review/g/guardians-/guardians-of-the-galaxy-vol-2-review_k3qt.1200.jpg)
+        no-repeat center center / cover;
+
+    > .header__details {
+      & h5 {
+        font-weight: var(--fw-bold);
+        font-size: var(--fs-200);
+      }
+
+      > .header__details__location {
+        display: flex;
+        align-items: center;
+        gap: 0.125rem;
+        font-size: var(--fs-100);
+        font-weight: var(--fw-light);
+
+        & svg {
+          width: 0.75rem;
+          height: 0.75rem;
+        }
+      }
+    }
+  }
+
+  > .body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    > .seats-legend {
+      display: flex;
+      gap: 0.5rem;
+      font-size: var(--fs-100);
+      color: #222;
+      padding: 1.25rem;
+
+      > .flex {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+
+      svg {
+        width: 0.75rem;
+      }
+    }
+
+    > .seats-grid {
+      display: grid;
+      grid-template-columns: 0.5fr repeat(4, 1fr) 0.35fr repeat(4, 1fr) 0.25fr;
+      grid-template-rows: repeat(7, 1fr);
+      gap: 0.25rem;
+      width: 90%;
+
+      > .seats-grid__column {
+        grid-row: span 7;
+        display: grid;
+        grid-template-rows: subgrid;
+
+        > span {
+          grid-column: span 1;
+          color: #ccc;
+          font-weight: var(--fw-medium);
+        }
+      }
+    }
+  }
+}
+
+.action-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--accent-color);
+  color: var(--white);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding-inline-end: 1.25rem;
+
+  > button {
+    background-color: var(--white);
+    color: var(--dark-blue);
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-300);
+    padding: 0.75rem 1.25rem;
+    border-radius: 1rem;
+  }
+
+  > .action-nav__grid {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    gap: 1.25rem;
+
+    > .action-nav__grid__column {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding-block: 0.5rem;
+
+      &:first-child {
+        padding-inline: 1rem;
+        background-color: color-mix(
+          in oklab,
+          var(--accent-color) 94%,
+          rgb(46, 46, 46)
+        );
+      }
+    }
+  }
+}

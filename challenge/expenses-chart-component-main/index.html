@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expenses Chart Component</title>
+    <link rel="stylesheet" href="./src/css/base.css" />
+    <link rel="stylesheet" href="./src/css/main.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader/dist/vue3-sfc-loader.js"></script>
+
+    <style>
+      #app {
+        display: grid;
+        place-content: center;
+        gap: 1rem;
+        padding: 1rem;
+        width: min(80%, 600px);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <balance-card balance="921.48"></balance-card>
+      <chart-card title="Spending - Last 7 days" :total-amount="totalAmount">
+        <chart :data-points="dataPoints"></chart>
+      </chart-card>
+    </div>
+
+    <script type="module">
+      import { loadModule } from "https://cdn.jsdelivr.net/npm/vue3-sfc-loader/dist/vue3-sfc-loader.esm.js";
+      import options from "./options.js";
+      import dataPoints from "./data.json" with { type: "json" };
+
+      const { createApp } = Vue;
+
+      const app = createApp({
+        components: {
+          "chart-card": Vue.defineAsyncComponent(() =>
+            loadModule("./src/components/ChartCard.vue", options)
+          ),
+          chart: Vue.defineAsyncComponent(() =>
+            loadModule("./src/components/Chart.vue", options)
+          ),
+          "balance-card": Vue.defineAsyncComponent(() =>
+            loadModule("./src/components/BalanceCard.vue", options)
+          ),
+        },
+        data() {
+          return {
+            dataPoints: dataPoints,
+            totalAmount: dataPoints.reduce((acc, curr) => acc + curr.amount, 0),
+          };
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>

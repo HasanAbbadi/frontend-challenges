@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./assets/images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Product list with cart</title>
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="main">
+        <h2 class="section-title">Desserts</h2>
+        <div class="product-grid">
+          <div
+            class="product"
+            :class="{ selected: cart.some(item => item.index === index) }"
+            v-for="(product, index) in products"
+            :key="index"
+          >
+            <div class="product-image">
+              <img
+                :srcset="product.image.mobile + ' 1x, ' + product.image.tablet + ' 2x, ' + product.image.desktop + ' 3x'"
+                :alt="product.name"
+              />
+              <button
+                v-if="!cart.some(item => item.index === index)"
+                class="add-to-cart"
+                @click="addToCart(index)"
+              >
+                <span class="icon">
+                  <img src="./assets/images/icon-add-to-cart.svg" alt="cart" />
+                </span>
+                Add to Cart
+              </button>
+              <button v-else class="add-remove-quantity">
+                <span class="icon" @click="decrementQuantity(index)">
+                  <img
+                    src="./assets/images/icon-decrement-quantity.svg"
+                    alt="decrement quantity"
+                  />
+                </span>
+                <span class="quantity"
+                  >{{ cart.find(item => item.index === index).quantity }}</span
+                >
+                <span class="icon" @click="incrementQuantity(index)">
+                  <img
+                    src="./assets/images/icon-increment-quantity.svg"
+                    alt="increment quantity"
+                  />
+                </span>
+              </button>
+            </div>
+            <div class="product-info">
+              <span class="product-category">{{ product.category }}</span>
+              <h3 class="product-name">{{ product.name }}</h3>
+              <p class="product-price">${{ product.price.toFixed(2) }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="cart.length > 0" class="cart">
+        <div class="cart-header">
+          Your Cart <span class="cart-items">({{ cart.length }})</span>
+        </div>
+        <div class="cart-items">
+          <div class="cart-item" v-for="(item, index) in cart" :key="index">
+            <h5 class="cart-item-name">{{ products[item.index].name }}</h5>
+            <div class="cart-item-info">
+              <span class="cart-item-quantity">{{ item.quantity }}x</span>
+              <span class="cart-item-price"
+                >@ ${{ products[item.index].price.toFixed(2) }}</span
+              >
+              <span class="cart-item-total"
+                >${{ (products[item.index].price * item.quantity).toFixed(2)
+                }}</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="cart-total">
+          <span class="cart-total-label">Order Total</span>
+          <span class="cart-total-price">${{ total.toFixed(2) }}</span>
+        </div>
+        <div class="delivery-notice">
+          <img
+            src="./assets/images/icon-carbon-neutral.svg"
+            alt="delivery"
+            class="delivery-notice-icon"
+          />
+          <span class="delivery-notice-label"
+            >This is a <b>carbon-neutral</b> delivery</span
+          >
+        </div>
+        <button class="cart-confirm-order" @click="openDialog">
+          Confirm Order
+        </button>
+      </div>
+      <div v-else class="cart">
+        <div class="cart-header">
+          Your Cart <span class="cart-items">({{ cart.length }})</span>
+        </div>
+        <div class="cart-empty">
+          <img
+            src="./assets/images/illustration-empty-cart.svg"
+            alt="cart empty"
+            class="cart-empty-icon"
+          />
+          <span class="cart-empty-label"
+            >Your added items will appear here</span
+          >
+        </div>
+      </div>
+
+      <dialog class="order-confirmation-dialog" ref="dialogRef">
+        <div class="header">
+          <img
+            src="./assets/images/icon-order-confirmed.svg"
+            alt="order confirmed"
+            class="icon"
+          />
+          <h2 class="order-confirmation-dialog-title">Order Confirmed!</h2>
+          <p class="order-confirmation-dialog-message">
+            We hope you enjoy your food!
+          </p>
+        </div>
+        <div class="order-items">
+          <div class="order-item" v-for="(item, index) in cart" :key="index">
+            <div class="left">
+              <img
+                :src="products[item.index].image.thumbnail"
+                :alt="products[item.index].name"
+              />
+              <div class="order-item-info">
+                <span class="order-item-name"
+                  >{{ products[item.index].name }}</span
+                >
+                <div class="order-item-quantity-price">
+                  <span class="order-item-quantity">{{ item.quantity }}x</span>
+                  <span class="order-item-price"
+                    >@ ${{ products[item.index].price.toFixed(2) }}</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="right">
+              <span class="order-item-total"
+                >${{ (products[item.index].price * item.quantity).toFixed(2)
+                }}</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="order-total">
+          <span class="order-total-label">Order Total</span>
+          <span class="order-total-price">${{ total.toFixed(2) }}</span>
+        </div>
+        <button class="new-order-button" @click="closeDialog">
+          Start New Order
+        </button>
+      </dialog>
+    </div>
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
+      Coded by <a href="https://github.com/HasanAbbadi">Hasan Abbadi</a>.
+    </div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import { createApp, ref, reactive, computed, watch } from "vue";
+
+      createApp({
+        setup() {
+          const products = ref([]);
+          const cart = reactive(JSON.parse(localStorage.getItem("cart")) || []);
+          const dialogRef = ref(null);
+
+          const total = computed(() => {
+            return cart.reduce((acc, item) => {
+              return acc + products.value[item.index].price * item.quantity;
+            }, 0);
+          });
+
+          fetch("./data.json")
+            .then((res) => res.json())
+            .then((data) => (products.value = data));
+
+          const addToCart = (index) => {
+            cart.push({ index, quantity: 1 });
+          };
+
+          const decrementQuantity = (index) => {
+            const itemIndex = cart.findIndex((item) => item.index === index);
+            if (itemIndex !== -1) {
+              if (cart[itemIndex].quantity === 1) {
+                cart.splice(itemIndex, 1); // Use splice to remove item reactively
+              } else {
+                cart[itemIndex].quantity--; // Ensure Vue detects changes
+              }
+            }
+          };
+
+          const incrementQuantity = (index) => {
+            const existingItem = cart.find((item) => item.index === index);
+            if (existingItem) {
+              existingItem.quantity++;
+            }
+          };
+
+          const openDialog = () => {
+            if (!dialogRef.value) return;
+            dialogRef.value.showModal();
+          };
+
+          const closeDialog = () => {
+            if (!dialogRef.value) return;
+            dialogRef.value.close();
+            cart.length = 0;
+          };
+
+          watch(cart, () => {
+            localStorage.setItem("cart", JSON.stringify(cart));
+          });
+
+          return {
+            products,
+            cart,
+            addToCart,
+            decrementQuantity,
+            incrementQuantity,
+            total,
+            dialogRef,
+            openDialog,
+            closeDialog,
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
