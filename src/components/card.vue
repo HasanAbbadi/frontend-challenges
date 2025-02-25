@@ -2,7 +2,7 @@
   <div class="card">
     <div class="header">
       <h5>
-        <a :href="`/challenge/${path}`">{{ title }}</a>
+        <a :href="`./challenge/${path}`">{{ title }}</a>
       </h5>
       <h6>
         <a class="source-link" :href="source" target="_blank">{{
