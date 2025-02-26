@@ -1,5 +1,12 @@
 [
   {
+    "name": "Rock paper scissors",
+    "path": "rock-paper-scissors-master",
+    "source": "https://www.frontendmentor.io/challenges/rock-paper-scissors-game-pTgwgvgH",
+    "tags": ["vue", "vue3-sfc-loader"],
+    "date": "2025-02-26"
+  },
+  {
     "name": "Expenses chart",
     "path": "expenses-chart-component-main",
     "source": "https://www.frontendmentor.io/challenges/expenses-chart-component-e7yJBUdjwt",

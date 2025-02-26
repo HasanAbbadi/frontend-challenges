@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="view-transition" content="same-origin" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./src/assets/images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Rock, Paper, Scissors</title>
+    <link rel="stylesheet" href="./src/css/base.css" />
+    <link rel="stylesheet" href="./src/css/main.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader/dist/vue3-sfc-loader.js"></script>
+    <style>
+      .game-container {
+        width: min(90%, 800px);
+
+        height: 100%;
+        display: grid;
+        place-items: start center;
+      }
+
+      @media (min-width: 768px) {
+        .rules-button {
+          position: absolute;
+          bottom: 40px;
+          right: 100px;
+          z-index: 100;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <header-card :score="score"></header-card>
+      <div class="game-container">
+        <rock-paper-scissors
+          v-if="!selectedItem"
+          @selected="selectItem"
+        ></rock-paper-scissors>
+        <duel-screen
+          v-else
+          :selected-item="selectedItem"
+          @finished="updateScore"
+          @play-again="playAgain"
+        ></duel-screen>
+      </div>
+      <button @click="openModal" class="rules-button">Rules</button>
+      <modal ref="modal"></modal>
+    </div>
+
+    <script type="module">
+      import { loadModule } from "https://cdn.jsdelivr.net/npm/vue3-sfc-loader/dist/vue3-sfc-loader.esm.js";
+      import options from "./options.js";
+
+      const { createApp } = Vue;
+
+      const app = createApp({
+        components: {
+          "header-card": Vue.defineAsyncComponent(() =>
+            loadModule("./src/components/header-card.vue", options)
+          ),
+          "rock-paper-scissors": Vue.defineAsyncComponent(() =>
+            loadModule("./src/components/rock-paper-scissors.vue", options)
+          ),
+          "duel-screen": Vue.defineAsyncComponent(() =>
+            loadModule("./src/components/duel-screen.vue", options)
+          ),
+          modal: Vue.defineAsyncComponent(() =>
+            loadModule("./src/components/modal.vue", options)
+          ),
+        },
+        data() {
+          return {
+            score: 0,
+            selectedItem: "",
+          };
+        },
+        methods: {
+          updateScore(result) {
+            this.score += result;
+          },
+          playAgain() {
+            this.selectedItem = null;
+          },
+          selectItem(item) {
+            this.selectedItem = item;
+          },
+          openModal() {
+            this.$refs.modal.openModal();
+          },
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>
