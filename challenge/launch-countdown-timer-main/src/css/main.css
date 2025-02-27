@@ -1,0 +1,62 @@
+/* Here you can add your global styles */
+
+#app {
+  /* width: min(90%, 600px); */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  max-width: 100%;
+  margin: 0 auto;
+  padding-block: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100dvh;
+  overflow: hidden;
+  gap: 4rem;
+
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+}
+
+button {
+  background-color: transparent;
+  border: 1px solid var(--clr-header-outline);
+  color: var(--clr-fg);
+  border-radius: var(--br-200);
+  font-weight: var(--fw-bold);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  /* width: 100%; */
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+}
+
+button:hover {
+  background-color: color-mix(in srgb, currentColor 25%, transparent);
+}
+
+button:active {
+  background-color: color-mix(in srgb, currentColor 40%, transparent);
+}
+
+button.primary {
+  border: none;
+  background-color: var(--clr-fg);
+  color: var(--clr-dark-text);
+}
+
+button.primary:hover {
+  background-color: color-mix(in srgb, currentColor 25%, var(--clr-fg));
+}
+
+button.primary:active {
+  background-color: color-mix(in srgb, currentColor 50%, var(--clr-fg));
+}

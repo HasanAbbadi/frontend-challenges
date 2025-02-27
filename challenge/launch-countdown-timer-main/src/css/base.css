@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@700&display=swap");
+
+:root {
+  --fs-100: clamp(0.7813rem, 0.7747rem + 0.0326vw, 0.8rem);
+  --fs-200: clamp(0.9375rem, 0.9158rem + 0.1087vw, 1rem);
+  --fs-300: clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem);
+  --fs-400: clamp(1.35rem, 1.2761rem + 0.3696vw, 1.5625rem);
+  --fs-500: clamp(1.62rem, 1.5041rem + 0.5793vw, 1.9531rem);
+  --fs-600: clamp(1.944rem, 1.771rem + 0.8651vw, 2.4414rem);
+  --fs-700: clamp(2.3438rem, 2.0889rem + 1.2793vw, 3.0521rem);
+  --fs-800: clamp(2.8125rem, 2.4688rem + 1.7302vw, 3.75rem);
+  --fs-900: clamp(3.375rem, 2.9167rem + 2.2917vw, 4.6875rem);
+
+  --fw-bold: 700;
+  --fw-regular: 700;
+
+  --br-600: 1.5rem;
+  --br-500: 1.25rem;
+  --br-400: 1rem;
+  --br-300: 0.75rem;
+  --br-200: 0.5rem;
+  --br-100: 0.25rem;
+
+  --clr-red: hsl(10, 79%, 65%);
+  --clr-green: hsl(152, 44%, 52%);
+  --clr-cyan: hsl(186, 34%, 60%);
+  --clr-orange: hsl(30, 58%, 52%);
+  --clr-grayish-blue: hsl(237, 18%, 59%);
+  --clr-soft-red: hsl(345, 95%, 68%);
+
+  --clr-primary: var(--clr-soft-red);
+  --clr-secondary: var(--clr-grayish-blue);
+
+  --clr-neutral-000: hsl(0, 0%, 97%);
+  --clr-neutral-500: hsl(236, 21%, 26%);
+  --clr-neutral-800: hsl(235, 16%, 14%);
+  --clr-neutral-900: hsl(234, 17%, 12%);
+
+  --clr-bg: var(--clr-neutral-900);
+  --clr-fg: var(--clr-neutral-000);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Red Hat Text", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+
+  background: var(--clr-bg) no-repeat center center fixed;
+  min-height: 100vh;
+  color: var(--clr-fg);
+  font-weight: var(--fw-regular);
+}

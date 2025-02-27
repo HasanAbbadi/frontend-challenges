@@ -1,5 +1,12 @@
 [
   {
+    "name": "Launch countdown timer",
+    "path": "launch-countdown-timer-main",
+    "source": "https://www.frontendmentor.io/challenges/launch-countdown-timer-N0XkGfyz-",
+    "tags": ["vue", "vue3-sfc-loader"],
+    "date": "2025-02-27"
+  },
+  {
     "name": "Rock paper scissors",
     "path": "rock-paper-scissors-master",
     "source": "https://www.frontendmentor.io/challenges/rock-paper-scissors-game-pTgwgvgH",

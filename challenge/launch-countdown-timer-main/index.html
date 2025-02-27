@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="src/assets/images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | Launch Countdown Timer</title>
+    <link rel="stylesheet" href="./src/css/base.css" />
+    <link rel="stylesheet" href="./src/css/main.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue3-sfc-loader/dist/vue3-sfc-loader.js"></script>
+    <style>
+      #app {
+        background: url("src/assets/images/pattern-hills.svg") no-repeat bottom
+            center,
+          url("src/assets/images/bg-stars.svg") no-repeat center center;
+        background-size: contain;
+      }
+
+      main {
+        display: grid;
+        align-items: center;
+        justify-content: space-around;
+        text-align: center;
+        height: 55%;
+        padding-inline: 1rem;
+      }
+
+      footer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <main>
+        <h2>We're launching soon</h2>
+        <clock :launch-date-time="launchDate" />
+      </main>
+      <footer>
+        <a href="#"
+          ><img src="src/assets/images/icon-facebook.svg" alt="Facebook"
+        /></a>
+        <a href="#"
+          ><img src="src/assets/images/icon-pinterest.svg" alt="Pinterest"
+        /></a>
+        <a href="#"
+          ><img src="src/assets/images/icon-instagram.svg" alt="Instagram"
+        /></a>
+      </footer>
+    </div>
+
+    <script type="module">
+      import { loadModule } from "https://cdn.jsdelivr.net/npm/vue3-sfc-loader/dist/vue3-sfc-loader.esm.js";
+      import options from "./options.js";
+
+      const { createApp } = Vue;
+
+      const app = createApp({
+        components: {
+          clock: Vue.defineAsyncComponent(() =>
+            loadModule("./src/components/clock.vue", options)
+          ),
+        },
+        data() {
+          return {
+            launchDate: new Date(
+              // 8 days, 12 hours from now
+              Date.now() + 8 * 24 * 60 * 60 * 1000 + 12 * 60 * 60 * 1000
+            ),
+          };
+        },
+        methods: {},
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>
